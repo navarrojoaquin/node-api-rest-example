@@ -1,0 +1,19 @@
+{
+  "name": "gameapi",
+  "version": "0.0.0",
+  "description": "A REST API for a social network for gamers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest",
+    "game"
+  ],
+  "author": "Joaquín Navarro",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~3.4.4",
+    "mongoose": "~3.8.0"
+  }
+}
