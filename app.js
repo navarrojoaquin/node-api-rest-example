@@ -1,7 +1,7 @@
 var express  = require("express"),
     app      = express(),
-    http     = require("http"),
-    server   = http.createServer(app),
+    https    = require("https"),
+    fs       = require("fs"),
     mongoose = require("mongoose");
 
 app.configure(function() {
@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
     res.send("Hello world!");
 });
 
-routes = require("./routes/games")(app)
+routes = require("./routes/games")(app);
 
 mongoose.connect('mongodb://localhost/gametest', function(err, res) {
     if (err) {
@@ -24,7 +24,10 @@ mongoose.connect('mongodb://localhost/gametest', function(err, res) {
     }
 });
 
-server.listen(3000, function() {
-    console.log("Node server running on http://localhost:3000");
-});
+var options = {
+  key: fs.readFileSync('fixtures/keys/key.pem'),
+  cert: fs.readFileSync('fixtures/keys/cert.pem')
+};
+
+https.createServer(options, app).listen(3000);
 
