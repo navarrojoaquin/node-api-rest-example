@@ -14,7 +14,7 @@ module.exports = function(app) {
 
     // GET: Return a Game with specified ID
     findById = function(req, res) {
-        Game.findById(req.param.id, function(err, game) {
+        Game.findById(req.params.id, function(err, game) {
             if (!err) {
                 res.send(game);
             } else {
@@ -68,6 +68,7 @@ module.exports = function(app) {
             game.remove(function(err) {
                 if (!err) {
                     console.log('Game removed');
+                    res.send({'status': 'Game removed'});
                 } else {
                     console.log('Error: ' + err);
                 }
@@ -76,9 +77,9 @@ module.exports = function(app) {
     };
 
     // Link routes and functions
-    app.get('/games', findAllGames);
-    app.get('/games/:id', findById);
-    app.post('/game', addGame);
-    app.put('/game/:id', updateGame);
-    app.delete('/game/:id', deleteGame);
+    app.get('/v0/games', findAllGames);
+    app.get('/v0/games/:id', findById);
+    app.post('/v0/game', addGame);
+    app.put('/v0/game/:id', updateGame);
+    app.delete('/v0/game/:id', deleteGame);
 }
